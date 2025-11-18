@@ -1,0 +1,1662 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TecnoStore | Tu e‑commerce de tecnología</title>
+    <meta name="description" content="TecnoStore: notebooks, componentes, periféricos, almacenamiento y más. Ofertas, envíos rápidos y garantía. Compra seguro en tema oscuro y accesible." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TecnoStore" />
+    <meta property="og:description" content="E‑commerce de productos informáticos. Encuentra notebooks, GPUs, SSDs, teclados, monitores y más." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://example.com" />
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=20" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230d6efd'/><text x='50' y='58' font-size='54' text-anchor='middle' fill='white' font-family='Arial'>T</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- README (cómo correr local) -->
+    <!--
+      TecnoStore – E‑commerce estático (demo)
+      Requisitos: Ninguno. Simplemente abre index.html en tu navegador.
+      Estructura: index.html, css/styles.css, js/app.js, data/products.json, img/ (placeholders online).
+      Notas: No requiere backend. Datos cargados con fetch desde data/products.json.
+    -->
+  </head>
+  <body class="bg-body text-body" style="font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', Helvetica, Arial, sans-serif;">
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-primary text-white rounded" href="#contenido" tabindex="0">Saltar al contenido</a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary sticky-top" role="navigation" aria-label="Barra de navegación principal">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#" aria-label="TecnoStore inicio">
+          <i class="bi bi-cpu-fill text-primary fs-4" aria-hidden="true"></i>
+          <strong>TecnoStore</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdownCategorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownCategorias">
+                <li><a class="dropdown-item" href="#" data-filter-cat="Notebooks">Notebooks</a></li>
+                <li><a class="dropdown-item" href="#" data-filter-cat="Componentes">Componentes</a></li>
+                <li><a class="dropdown-item" href="#" data-filter-cat="Periféricos">Periféricos</a></li>
+                <li><a class="dropdown-item" href="#" data-filter-cat="Almacenamiento">Almacenamiento</a></li>
+                <li><a class="dropdown-item" href="#" data-filter-cat="Redes">Redes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#promos">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#footer">Soporte</a></li>
+          </ul>
+
+          <!-- Search with autocomplete -->
+          <form class="d-flex position-relative me-3" role="search" aria-label="Buscar productos">
+            <label for="searchInput" class="visually-hidden">Buscar</label>
+            <input id="searchInput" class="form-control form-control-sm bg-transparent text-light border-secondary" type="search" placeholder="Buscar productos..." aria-label="Buscar" autocomplete="off">
+            <div id="searchSuggestions" class="list-group position-absolute top-100 start-0 w-100 z-3 d-none" role="listbox" aria-label="Sugerencias"></div>
+          </form>
+
+          <div class="d-flex align-items-center gap-2">
+            <button id="btnUser" class="btn btn-outline-light btn-sm position-relative" type="button" data-bs-toggle="modal" data-bs-target="#authModal" aria-label="Abrir usuario">
+              <i class="bi bi-person"></i>
+              <span class="visually-hidden" id="userStateText">Iniciar sesión</span>
+            </button>
+            <button class="btn btn-primary btn-sm position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" aria-label="Abrir carrito">
+              <i class="bi bi-cart3"></i>
+              <span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" aria-label="Cantidad en carrito">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main id="contenido" class="pb-5">
+      <!-- Hero Carousel -->
+      <section class="container pt-3 pt-lg-4" aria-label="Promociones destacadas">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner rounded shadow-sm overflow-hidden">
+            <div class="carousel-item active" aria-label="Tecnología de punta">
+              <img src="images/imagen3.png" class="d-block w-100" alt="Fondo tecnológico con luces azules" loading="lazy">
+              <div class="carousel-caption text-start">
+               
+                <a href="#promos" class="btn btn-primary btn-sm">Ver ofertas</a>
+              </div>
+            </div>
+            <div class="carousel-item" aria-label="Componentes premium">
+              <img src="images/imagen1.png" class="d-block w-100" alt="Placa madre con iluminación" loading="lazy">
+              <div class="carousel-caption">
+                
+                <a href="#productos" class="btn btn-outline-light btn-sm">Explorar</a>
+              </div>
+            </div>
+            <div class="carousel-item" aria-label="Periféricos y accesorios">
+              <img src="images/imagen2.png" class="d-block w-100" alt="Teclado mecánico con iluminación RGB" loading="lazy">
+              <div class="carousel-caption text-end">
+                
+                <a href="#categorias" class="btn btn-primary btn-sm">Ver categorías</a>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Anterior">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Siguiente">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Categorías -->
+      <section id="categorias" class="container py-5">
+        <header class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="m-0">Categorías</h3>
+          
+        </header>
+        <div class="row g-3" role="list">
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Notebooks">
+              <div class="card-body text-center">
+                <i class="bi bi-laptop fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Notebooks</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Componentes">
+              <div class="card-body text-center">
+                <i class="bi bi-gpu-card fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Componentes</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Periféricos">
+              <div class="card-body text-center">
+                <i class="bi bi-keyboard fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Periféricos</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Almacenamiento">
+              <div class="card-body text-center">
+                <i class="bi bi-device-ssd fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Almacenamiento</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Redes">
+              <div class="card-body text-center">
+                <i class="bi bi-router fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Redes</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2" role="listitem">
+            <a href="#" class="card category-card text-decoration-none h-100" data-filter-cat="Monitores">
+              <div class="card-body text-center">
+                <i class="bi bi-display fs-1 text-primary" aria-hidden="true"></i>
+                <h6 class="mt-2 text-white">Monitores</h6>
+                <span class="text-secondary small">Ver productos</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Promos/Banners -->
+      <section id="promos" class="container pb-5">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="banner rounded-3 p-4 d-flex flex-column justify-content-between" style="background: linear-gradient(135deg,#1c2530,#0b0f14); min-height:140px;">
+              <div>
+                <h5 class="mb-1">Hasta 30% OFF</h5>
+                <p class="text-secondary mb-2">En almacenamiento y memorias seleccionadas</p>
+              </div>
+              <a href="#productos" class="btn btn-outline-light btn-sm align-self-start">Comprar ahora</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="banner rounded-3 p-4 d-flex flex-column justify-content-between" style="background: linear-gradient(135deg,#121826,#0d6efd22); min-height:140px;">
+              <div>
+                <h5 class="mb-1">Gaming Week</h5>
+                <p class="text-secondary mb-2">GPUs y periféricos con descuento</p>
+              </div>
+              <a href="#productos" class="btn btn-primary btn-sm align-self-start">Ver más</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galería: Carousel de tres imágenes -->
+  
+
+      <!-- Productos + filtros -->
+      <section id="productos" class="container pb-5">
+        <div class="row g-4">
+          <aside class="col-lg-3" aria-label="Filtros de productos">
+            <div class="card bg-dark-subtle border-0 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Filtrar</h5>
+                <div class="mb-3">
+                  <label for="filterCategory" class="form-label">Categoría</label>
+                  <select id="filterCategory" class="form-select form-select-sm bg-transparent text-light border-secondary" aria-label="Filtrar por categoría">
+                    <option value="">Todas</option>
+                    <option>Notebooks</option>
+                    <option>Componentes</option>
+                    <option>Periféricos</option>
+                    <option>Almacenamiento</option>
+                    <option>Redes</option>
+                    <option>Monitores</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="filterBrand" class="form-label">Marca</label>
+                  <select id="filterBrand" class="form-select form-select-sm bg-transparent text-light border-secondary" aria-label="Filtrar por marca">
+                    <option value="">Todas</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="priceRange">Precio máximo: <span id="priceRangeValue">PYG0</span></label>
+                  <input id="priceRange" type="range" class="form-range" min="0" max="3000" step="50" value="3000" aria-describedby="priceRangeValue" />
+                </div>
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" role="switch" id="switchStock">
+                  <label class="form-check-label" for="switchStock">Solo disponibles</label>
+                </div>
+                <button id="btnClearFilters" class="btn btn-secondary btn-sm w-100">Limpiar filtros</button>
+              </div>
+            </div>
+          </aside>
+
+          <div class="col-lg-9">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="text-secondary small" aria-live="polite">
+                <span id="resultCount">0</span> productos
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <label for="sortSelect" class="form-label m-0">Ordenar</label>
+                <select id="sortSelect" class="form-select form-select-sm bg-transparent text-light border-secondary" aria-label="Ordenar productos">
+                  <option value="relevancia">Relevancia</option>
+                  <option value="precio-asc">Precio ↑</option>
+                  <option value="precio-desc">Precio ↓</option>
+                  <option value="novedades">Novedades</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="productGrid" class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3" aria-live="polite"></div>
+
+            <nav class="mt-3" aria-label="Paginación de productos">
+              <ul id="pagination" class="pagination pagination-sm justify-content-center mb-0"></ul>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- Por qué comprar -->
+      <section class="container pb-5">
+        <h3 class="mb-3">¿Por qué comprar en TecnoStore?</h3>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="card h-100 text-center">
+              <div class="card-body d-flex flex-column align-items-center justify-content-center gap-2">
+                <i class="bi bi-truck fs-2 text-primary" aria-hidden="true"></i>
+                <h6 class="mb-0">Envíos a todo el país</h6>
+                <p class="text-secondary small mb-0">Rápidos y seguros</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100 text-center">
+              <div class="card-body d-flex flex-column align-items-center justify-content-center gap-2">
+                <i class="bi bi-shield-check fs-2 text-primary" aria-hidden="true"></i>
+                <h6 class="mb-0">Garantía oficial</h6>
+                <p class="text-secondary small mb-0">Compra con confianza</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100 text-center">
+              <div class="card-body d-flex flex-column align-items-center justify-content-center gap-2">
+                <i class="bi bi-headset fs-2 text-primary" aria-hidden="true"></i>
+                <h6 class="mb-0">Soporte experto</h6>
+                <p class="text-secondary small mb-0">Te ayudamos a elegir</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card h-100 text-center">
+              <div class="card-body d-flex flex-column align-items-center justify-content-center gap-2">
+                <i class="bi bi-credit-card fs-2 text-primary" aria-hidden="true"></i>
+                <h6 class="mb-0">Pagos seguros</h6>
+                <p class="text-secondary small mb-0">Multiples medios</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-dark border-top border-secondary mt-auto pt-4">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3">
+            <h6>TecnoStore</h6>
+            <p class="text-secondary small">Tu tienda de tecnología en línea. Ofertas y soporte experto.</p>
+          </div>
+          <div class="col-md-3">
+            <h6>Enlaces</h6>
+            <ul class="list-unstyled small">
+              <li><a class="link-light" href="#">Inicio</a></li>
+              <li><a class="link-light" href="#categorias">Categorías</a></li>
+              <li><a class="link-light" href="#promos">Ofertas</a></li>
+              <li><a class="link-light" href="#productos">Productos</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6>Medios de pago</h6>
+            <div class="d-flex gap-3 text-secondary">
+              <i class="bi bi-credit-card-2-front" aria-label="Tarjeta"></i>
+              <i class="bi bi-paypal" aria-label="PayPal"></i>
+              <i class="bi bi-cash" aria-label="Efectivo"></i>
+            </div>
+            <h6 class="mt-3">Redes</h6>
+            <div class="d-flex gap-3">
+              <a class="text-secondary" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a class="text-secondary" href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+              <a class="text-secondary" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h6>Newsletter</h6>
+            <form class="needs-validation" novalidate>
+              <label for="newsletterEmail" class="form-label">Email</label>
+              <input id="newsletterEmail" type="email" class="form-control form-control-sm bg-transparent text-light border-secondary" placeholder="tu@email.com" required>
+              <div class="invalid-feedback">Ingresa un email válido</div>
+              <button class="btn btn-primary btn-sm mt-2" type="submit">Suscribirme</button>
+            </form>
+            <address class="small text-secondary mt-3 mb-0">
+              <strong>Contacto:</strong> soporte@tecnostore.com<br>
+              0800-123-4567
+            </address>
+          </div>
+        </div>
+        <div class="py-3 text-center text-secondary small">© <span id="year"></span> TecnoStore. Todos los derechos reservados.</div>
+      </div>
+    </footer>
+
+    <!-- Offcanvas Carrito -->
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column">
+        <div id="cartItems" class="vstack gap-3 flex-grow-1"></div>
+        <div class="mt-3 border-top pt-3">
+          <div class="d-flex justify-content-between small text-secondary"><span>Subtotal</span><span id="cartSubtotal">PYG0</span></div>
+          <div class="d-flex justify-content-between small text-secondary"><span>Envío (estimado)</span><span id="cartShipping">PYG0</span></div>
+          <div class="d-flex justify-content-between fw-bold fs-6"><span>Total</span><span id="cartTotal">PYG0</span></div>
+          <div class="d-flex gap-2 mt-3">
+            <button id="btnClearCart" class="btn btn-outline-light btn-sm">Vaciar</button>
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="offcanvas">Seguir comprando</button>
+            <button id="btnCheckout" class="btn btn-primary btn-sm ms-auto">Finalizar compra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Auth (Login/Registro con tabs) -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="authModalLabel">Tu cuenta</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs" id="authTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#tab-login" type="button" role="tab" aria-controls="tab-login" aria-selected="true">Iniciar sesión</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#tab-register" type="button" role="tab" aria-controls="tab-register" aria-selected="false">Registrarse</button>
+              </li>
+            </ul>
+            <div class="tab-content pt-3">
+              <div class="tab-pane fade show active" id="tab-login" role="tabpanel" aria-labelledby="login-tab">
+                <form id="loginForm" class="needs-validation" novalidate>
+                  <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input id="loginEmail" type="email" class="form-control bg-transparent text-light border-secondary" required>
+                    <div class="invalid-feedback">Ingresa un email válido</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <input id="loginPassword" type="password" class="form-control bg-transparent text-light border-secondary" required minlength="6">
+                    <div class="invalid-feedback">La contraseña es requerida (mínimo 6 caracteres)</div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary" type="submit">Ingresar</button>
+                    <button id="btnLogout" class="btn btn-outline-light d-none" type="button">Cerrar sesión</button>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane fade" id="tab-register" role="tabpanel" aria-labelledby="register-tab">
+                <form id="registerForm" class="needs-validation" novalidate>
+                  <div class="mb-3">
+                    <label for="regName" class="form-label">Nombre</label>
+                    <input id="regName" type="text" class="form-control bg-transparent text-light border-secondary" required>
+                    <div class="invalid-feedback">Ingresa tu nombre</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="regEmail" class="form-label">Email</label>
+                    <input id="regEmail" type="email" class="form-control bg-transparent text-light border-secondary" required>
+                    <div class="invalid-feedback">Ingresa un email válido</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="regPassword" class="form-label">Contraseña</label>
+                    <input id="regPassword" type="password" class="form-control bg-transparent text-light border-secondary" required minlength="6">
+                    <div class="invalid-feedback">Mínimo 6 caracteres</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="regPassword2" class="form-label">Confirmar contraseña</label>
+                    <input id="regPassword2" type="password" class="form-control bg-transparent text-light border-secondary" required minlength="6">
+                    <div class="invalid-feedback">Las contraseñas deben coincidir</div>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Crear cuenta</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detalle de Producto -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productModalLabel">Detalle</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div id="productGallery" class="carousel slide" data-bs-interval="false">
+                  <div class="carousel-inner" id="productGalleryInner"></div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#productGallery" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#productGallery" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h4 id="modalTitle">Producto</h4>
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div id="modalBadges"></div>
+                  <div class="text-warning" id="modalStars" aria-label="Valoración"></div>
+                </div>
+                <p class="text-secondary" id="modalDesc"></p>
+                <div class="d-flex align-items-baseline gap-2">
+                  <span class="fs-4" id="modalPrice"></span>
+                  <span class="text-decoration-line-through text-secondary" id="modalPriceOld"></span>
+                </div>
+                <div class="my-3" id="modalVariants"></div>
+                <button id="modalAddToCart" class="btn btn-primary btn-sm"><i class="bi bi-cart-plus me-1"></i>Agregar al carrito</button>
+              </div>
+              <div class="col-12">
+                <h6>Especificaciones</h6>
+                <div class="table-responsive">
+                  <table class="table table-dark table-striped table-sm align-middle mb-0" id="modalSpecs"></table>
+                </div>
+              </div>
+              <div class="col-12">
+                <h6 class="mt-3">Opiniones</h6>
+                <div id="modalReviews" class="vstack gap-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;" aria-live="polite" aria-atomic="true">
+      <div id="toast" class="toast text-bg-dark border border-secondary" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="2000">
+        <div class="toast-body d-flex align-items-center gap-2">
+          <i class="bi bi-check-circle-fill text-success"></i>
+          <span id="toastMsg">Acción realizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- App JS -->
+    <script src="js/app.js"></script>
+  </body>
+  </html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlaces Favoritos</title>
+    <style>
+        :root {
+            --bg-primary: #0f1115;
+            --bg-secondary: #121212;
+            --text-primary: #eaeaea;
+            --text-secondary: #a7a7a7;
+            --accent: #4a9eff;
+            --accent-hover: #3a8eef;
+            --border: #2a2a2a;
+            --card-bg: #1a1a1a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+
+        /* Main content */
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .view-toggle button {
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-toggle button.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Grid */
+        .links-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .links-grid.compact {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+        }
+
+        .links-grid.compact .link-card {
+            flex-direction: row;
+            padding: 1rem;
+        }
+
+        .links-grid.compact .link-image {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+        }
+
+        .links-grid.compact .link-content {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: move;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .link-card.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+
+        .link-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .link-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .link-content {
+            flex: 1;
+        }
+
+        .link-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .link-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .link-url {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-decoration: none;
+            word-break: break-all;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .link-url:hover {
+            text-decoration: underline;
+        }
+
+        .link-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .link-actions .btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-primary);
+            z-index: 3000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            max-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--error);
+        }
+
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                order: 2;
+            }
+
+            .header-actions {
+                order: 1;
+                justify-content: center;
+            }
+
+            .main {
+                padding: 1rem;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .links-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .links-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Drag and drop styles */
+        .drop-zone {
+            border: 2px dashed var(--accent);
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Focus styles for accessibility */
+        .btn:focus,
+        .form-input:focus,
+        .search-input:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Screen reader only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <h1 class="logo">🔗 Enlaces Favoritos</h1>
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Buscar enlaces..." 
+                    id="searchInput"
+                    aria-label="Buscar enlaces"
+                >
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="addLinkBtn" aria-label="Agregar nuevo enlace">
+                    ➕ Agregar
+                </button>
+                <button class="btn btn-secondary" id="importExportBtn" aria-label="Importar o exportar enlaces">
+                    📁 Importar/Exportar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main" role="main">
+        <div class="view-toggle">
+            <button class="btn active" id="gridViewBtn" aria-label="Vista de tarjetas">📋 Tarjetas</button>
+            <button class="btn" id="listViewBtn" aria-label="Vista de lista">📝 Lista</button>
+        </div>
+
+        <div class="links-grid" id="linksGrid">
+            <!-- Los enlaces se cargarán aquí dinámicamente -->
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <h3>No hay enlaces guardados</h3>
+            <p>Agrega tu primer enlace favorito usando el botón "Agregar"</p>
+        </div>
+    </main>
+
+    <!-- Modal para agregar/editar enlace -->
+    <div class="modal" id="linkModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Agregar Enlace</h2>
+                <button class="close-btn" id="closeModal" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <form id="linkForm">
+                <div class="form-group">
+                    <label for="linkTitle" class="form-label">Título *</label>
+                    <input 
+                        type="text" 
+                        id="linkTitle" 
+                        class="form-input" 
+                        required 
+                        placeholder="Nombre del enlace"
+                        aria-describedby="titleHelp"
+                    >
+                    <small id="titleHelp" class="sr-only">Título obligatorio para el enlace</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkUrl" class="form-label">URL *</label>
+                    <input 
+                        type="url" 
+                        id="linkUrl" 
+                        class="form-input" 
+                        required 
+                        placeholder="https://ejemplo.com"
+                        aria-describedby="urlHelp"
+                    >
+                    <small id="urlHelp" class="sr-only">URL obligatoria, se validará automáticamente</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkDescription" class="form-label">Descripción</label>
+                    <textarea 
+                        id="linkDescription" 
+                        class="form-input form-textarea" 
+                        placeholder="Descripción opcional del enlace"
+                        aria-describedby="descHelp"
+                    ></textarea>
+                    <small id="descHelp" class="sr-only">Descripción opcional del enlace</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkImage" class="form-label">Imagen</label>
+                    <input 
+                        type="url" 
+                        id="linkImage" 
+                        class="form-input" 
+                        placeholder="URL de imagen o deja vacío para placeholder"
+                        aria-describedby="imageHelp"
+                    >
+                    <small id="imageHelp" class="sr-only">URL de imagen opcional</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">
+                        <span class="loading" id="saveLoading" style="display: none;"></span>
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para importar/exportar -->
+    <div class="modal" id="importExportModal" role="dialog" aria-labelledby="importExportTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="importExportTitle">Importar/Exportar Enlaces</h2>
+                <button class="close-btn" id="closeImportExportModal" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="jsonData" class="form-label">Datos JSON</label>
+                <textarea 
+                    id="jsonData" 
+                    class="form-input form-textarea" 
+                    rows="10"
+                    placeholder="Pega aquí el JSON exportado o edita los datos..."
+                    aria-describedby="jsonHelp"
+                ></textarea>
+                <small id="jsonHelp" class="sr-only">Datos en formato JSON para importar o exportar</small>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="exportBtn">📤 Exportar</button>
+                <button type="button" class="btn btn-primary" id="importBtn">📥 Importar</button>
+                <button type="button" class="btn btn-secondary" id="cancelImportExportBtn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toastContainer"></div>
+
+    <script>
+        class FavoritesManager {
+            constructor() {
+                this.links = this.loadFromStorage();
+                this.currentEditId = null;
+                this.isGridView = true;
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.render();
+                this.updateEmptyState();
+            }
+
+            bindEvents() {
+                // Header actions
+                document.getElementById('addLinkBtn').addEventListener('click', () => this.showAddModal());
+                document.getElementById('importExportBtn').addEventListener('click', () => this.showImportExportModal());
+                
+                // Search
+                document.getElementById('searchInput').addEventListener('input', (e) => this.filterLinks(e.target.value));
+                
+                // View toggle
+                document.getElementById('gridViewBtn').addEventListener('click', () => this.setView('grid'));
+                document.getElementById('listViewBtn').addEventListener('click', () => this.setView('list'));
+                
+                // Modal events
+                document.getElementById('closeModal').addEventListener('click', () => this.hideModal());
+                document.getElementById('cancelBtn').addEventListener('click', () => this.hideModal());
+                document.getElementById('closeImportExportModal').addEventListener('click', () => this.hideImportExportModal());
+                document.getElementById('cancelImportExportBtn').addEventListener('click', () => this.hideImportExportModal());
+                
+                // Form submission
+                document.getElementById('linkForm').addEventListener('submit', (e) => this.handleFormSubmit(e));
+                
+                // Import/Export
+                document.getElementById('exportBtn').addEventListener('click', () => this.exportLinks());
+                document.getElementById('importBtn').addEventListener('click', () => this.importLinks());
+                
+                // URL validation
+                document.getElementById('linkUrl').addEventListener('blur', (e) => this.validateAndNormalizeUrl(e.target));
+                
+                // Close modals on escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.hideModal();
+                        this.hideImportExportModal();
+                    }
+                });
+            }
+
+            loadFromStorage() {
+                try {
+                    const stored = localStorage.getItem('favoriteLinks');
+                    return stored ? JSON.parse(stored) : [];
+                } catch (error) {
+                    console.error('Error loading from storage:', error);
+                    return [];
+                }
+            }
+
+            saveToStorage() {
+                try {
+                    localStorage.setItem('favoriteLinks', JSON.stringify(this.links));
+                } catch (error) {
+                    console.error('Error saving to storage:', error);
+                    this.showToast('Error al guardar en localStorage', 'error');
+                }
+            }
+
+            showAddModal() {
+                this.currentEditId = null;
+                document.getElementById('modalTitle').textContent = 'Agregar Enlace';
+                document.getElementById('linkForm').reset();
+                document.getElementById('saveBtn').textContent = 'Guardar';
+                this.showModal();
+            }
+
+            showEditModal(linkId) {
+                const link = this.links.find(l => l.id === linkId);
+                if (!link) return;
+
+                this.currentEditId = linkId;
+                document.getElementById('modalTitle').textContent = 'Editar Enlace';
+                document.getElementById('linkTitle').value = link.title;
+                document.getElementById('linkUrl').value = link.url;
+                document.getElementById('linkDescription').value = link.description || '';
+                document.getElementById('linkImage').value = link.image || '';
+                document.getElementById('saveBtn').textContent = 'Actualizar';
+                this.showModal();
+            }
+
+            showModal() {
+                const modal = document.getElementById('linkModal');
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.getElementById('linkTitle').focus();
+            }
+
+            hideModal() {
+                const modal = document.getElementById('linkModal');
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            showImportExportModal() {
+                const modal = document.getElementById('importExportModal');
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                this.exportLinks();
+            }
+
+            hideImportExportModal() {
+                const modal = document.getElementById('importExportModal');
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            async handleFormSubmit(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('linkTitle').value.trim();
+                const url = document.getElementById('linkUrl').value.trim();
+                const description = document.getElementById('linkDescription').value.trim();
+                const image = document.getElementById('linkImage').value.trim();
+
+                if (!title || !url) {
+                    this.showToast('Título y URL son obligatorios', 'error');
+                    return;
+                }
+
+                // Normalize URL
+                const normalizedUrl = this.normalizeUrl(url);
+                if (!normalizedUrl) {
+                    this.showToast('URL inválida', 'error');
+                    return;
+                }
+
+                // Check for duplicates
+                const existingLink = this.links.find(l => l.url === normalizedUrl && l.id !== this.currentEditId);
+                if (existingLink) {
+                    if (!confirm('Ya existe un enlace con esta URL. ¿Deseas continuar de todos modos?')) {
+                        return;
+                    }
+                }
+
+                const linkData = {
+                    title,
+                    url: normalizedUrl,
+                    description,
+                    image: image || null,
+                    createdAt: this.currentEditId ? this.links.find(l => l.id === this.currentEditId).createdAt : new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                };
+
+                if (this.currentEditId) {
+                    // Update existing link
+                    const index = this.links.findIndex(l => l.id === this.currentEditId);
+                    this.links[index] = { ...this.links[index], ...linkData };
+                    this.showToast('Enlace actualizado correctamente', 'success');
+                } else {
+                    // Add new link
+                    const newLink = {
+                        id: Date.now().toString(),
+                        ...linkData
+                    };
+                    this.links.unshift(newLink);
+                    this.showToast('Enlace guardado correctamente', 'success');
+                }
+
+                this.saveToStorage();
+                this.render();
+                this.updateEmptyState();
+                this.hideModal();
+            }
+
+            normalizeUrl(url) {
+                if (!url) return null;
+                
+                // Add protocol if missing
+                if (!url.match(/^https?:\/\//)) {
+                    url = 'https://' + url;
+                }
+                
+                try {
+                    new URL(url);
+                    return url;
+                } catch {
+                    return null;
+                }
+            }
+
+            validateAndNormalizeUrl(input) {
+                const normalized = this.normalizeUrl(input.value);
+                if (normalized) {
+                    input.value = normalized;
+                    input.style.borderColor = '';
+                } else if (input.value) {
+                    input.style.borderColor = 'var(--error)';
+                }
+            }
+
+            deleteLink(linkId) {
+                if (!confirm('¿Estás seguro de que deseas eliminar este enlace?')) {
+                    return;
+                }
+
+                this.links = this.links.filter(l => l.id !== linkId);
+                this.saveToStorage();
+                this.render();
+                this.updateEmptyState();
+                this.showToast('Enlace eliminado correctamente', 'success');
+            }
+
+            copyUrl(url) {
+                navigator.clipboard.writeText(url).then(() => {
+                    this.showToast('URL copiada al portapapeles', 'success');
+                }).catch(() => {
+                    this.showToast('Error al copiar URL', 'error');
+                });
+            }
+
+            openLink(url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+
+            filterLinks(query) {
+                const cards = document.querySelectorAll('.link-card');
+                const normalizedQuery = query.toLowerCase().trim();
+
+                cards.forEach(card => {
+                    const title = card.querySelector('.link-title').textContent.toLowerCase();
+                    const description = card.querySelector('.link-description').textContent.toLowerCase();
+                    const url = card.querySelector('.link-url').textContent.toLowerCase();
+
+                    const matches = !normalizedQuery || 
+                        title.includes(normalizedQuery) || 
+                        description.includes(normalizedQuery) ||
+                        url.includes(normalizedQuery);
+
+                    card.style.display = matches ? 'flex' : 'none';
+                });
+            }
+
+            setView(view) {
+                this.isGridView = view === 'grid';
+                const grid = document.getElementById('linksGrid');
+                const gridBtn = document.getElementById('gridViewBtn');
+                const listBtn = document.getElementById('listViewBtn');
+
+                if (this.isGridView) {
+                    grid.classList.remove('compact');
+                    gridBtn.classList.add('active');
+                    listBtn.classList.remove('active');
+                } else {
+                    grid.classList.add('compact');
+                    listBtn.classList.add('active');
+                    gridBtn.classList.remove('active');
+                }
+            }
+
+            render() {
+                const grid = document.getElementById('linksGrid');
+                grid.innerHTML = '';
+
+                this.links.forEach(link => {
+                    const card = this.createLinkCard(link);
+                    grid.appendChild(card);
+                });
+
+                this.initDragAndDrop();
+            }
+
+            createLinkCard(link) {
+                const card = document.createElement('div');
+                card.className = 'link-card';
+                card.draggable = true;
+                card.dataset.linkId = link.id;
+
+                const imageHtml = link.image ? 
+                    `<img src="${this.escapeHtml(link.image)}" alt="${this.escapeHtml(link.title)}" onerror="this.parentElement.innerHTML='<div>🖼️</div><div>Imagen no disponible</div>'">` :
+                    '<div>🔗</div><div>Sin imagen</div>';
+
+                card.innerHTML = `
+                    <div class="link-image">
+                        ${imageHtml}
+                    </div>
+                    <div class="link-content">
+                        <h3 class="link-title">${this.escapeHtml(link.title)}</h3>
+                        <p class="link-description">${this.escapeHtml(link.description || 'Sin descripción')}</p>
+                        <a href="${this.escapeHtml(link.url)}" class="link-url" target="_blank" rel="noopener noreferrer">
+                            ${this.escapeHtml(link.url)}
+                        </a>
+                        <div class="link-actions">
+                            <button class="btn btn-primary" onclick="favoritesManager.openLink('${this.escapeHtml(link.url)}')" aria-label="Abrir enlace">
+                                🔗 Abrir
+                            </button>
+                            <button class="btn btn-secondary" onclick="favoritesManager.showEditModal('${link.id}')" aria-label="Editar enlace">
+                                ✏️ Editar
+                            </button>
+                            <button class="btn btn-secondary" onclick="favoritesManager.copyUrl('${this.escapeHtml(link.url)}')" aria-label="Copiar URL">
+                                📋 Copiar
+                            </button>
+                            <button class="btn btn-danger" onclick="favoritesManager.deleteLink('${link.id}')" aria-label="Eliminar enlace">
+                                🗑️ Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                return card;
+            }
+
+            initDragAndDrop() {
+                const grid = document.getElementById('linksGrid');
+                let draggedElement = null;
+
+                grid.addEventListener('dragstart', (e) => {
+                    if (e.target.classList.contains('link-card')) {
+                        draggedElement = e.target;
+                        e.target.classList.add('dragging');
+                        e.dataTransfer.effectAllowed = 'move';
+                    }
+                });
+
+                grid.addEventListener('dragend', (e) => {
+                    if (e.target.classList.contains('link-card')) {
+                        e.target.classList.remove('dragging');
+                        draggedElement = null;
+                    }
+                });
+
+                grid.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                grid.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    
+                    if (!draggedElement) return;
+
+                    const afterElement = this.getDragAfterElement(grid, e.clientY);
+                    const linkId = draggedElement.dataset.linkId;
+                    const linkIndex = this.links.findIndex(l => l.id === linkId);
+                    const link = this.links[linkIndex];
+
+                    // Remove from current position
+                    this.links.splice(linkIndex, 1);
+
+                    // Insert at new position
+                    if (afterElement == null) {
+                        this.links.push(link);
+                    } else {
+                        const afterIndex = this.links.findIndex(l => l.id === afterElement.dataset.linkId);
+                        this.links.splice(afterIndex, 0, link);
+                    }
+
+                    this.saveToStorage();
+                    this.render();
+                });
+            }
+
+            getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.link-card:not(.dragging)')];
+                
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            exportLinks() {
+                const jsonData = JSON.stringify(this.links, null, 2);
+                document.getElementById('jsonData').value = jsonData;
+            }
+
+            importLinks() {
+                try {
+                    const jsonData = document.getElementById('jsonData').value.trim();
+                    if (!jsonData) {
+                        this.showToast('No hay datos para importar', 'warning');
+                        return;
+                    }
+
+                    const importedLinks = JSON.parse(jsonData);
+                    
+                    if (!Array.isArray(importedLinks)) {
+                        throw new Error('Los datos deben ser un array de enlaces');
+                    }
+
+                    // Validate structure
+                    const validLinks = importedLinks.filter(link => 
+                        link && 
+                        typeof link.title === 'string' && 
+                        typeof link.url === 'string' &&
+                        link.title.trim() && 
+                        link.url.trim()
+                    );
+
+                    if (validLinks.length === 0) {
+                        this.showToast('No se encontraron enlaces válidos para importar', 'warning');
+                        return;
+                    }
+
+                    // Add IDs to imported links if missing
+                    const processedLinks = validLinks.map(link => ({
+                        ...link,
+                        id: link.id || Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                        createdAt: link.createdAt || new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    }));
+
+                    this.links = processedLinks;
+                    this.saveToStorage();
+                    this.render();
+                    this.updateEmptyState();
+                    this.hideImportExportModal();
+                    this.showToast(`${validLinks.length} enlaces importados correctamente`, 'success');
+
+                } catch (error) {
+                    console.error('Error importing links:', error);
+                    this.showToast('Error al importar enlaces. Verifica el formato JSON.', 'error');
+                }
+            }
+
+            updateEmptyState() {
+                const emptyState = document.getElementById('emptyState');
+                const grid = document.getElementById('linksGrid');
+                
+                if (this.links.length === 0) {
+                    emptyState.style.display = 'block';
+                    grid.style.display = 'none';
+                } else {
+                    emptyState.style.display = 'none';
+                    grid.style.display = 'grid';
+                }
+            }
+
+            showToast(message, type = 'success') {
+                const container = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                
+                container.appendChild(toast);
+                
+                // Trigger animation
+                setTimeout(() => toast.classList.add('show'), 100);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => container.removeChild(toast), 300);
+                }, 3000);
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the application
+        const favoritesManager = new FavoritesManager();
+    </script>
+</body>
+</html>
+

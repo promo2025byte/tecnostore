@@ -1,0 +1,615 @@
+[
+  {
+    "id": "p001",
+    "categoria": "Notebooks",
+    "marca": "Lenovo",
+    "titulo": "Lenovo IdeaPad 5 14\" Ryzen 7",
+    "descripcion": "14\" FHD, Ryzen 7, 16GB, 512GB SSD, Win 11",
+    "precio": 300000,
+    "precioAnterior": 400000,
+    "descuento": 10,
+    "stock": 12,
+    "rating": 4.6,
+    "imagenes": ["https://nissei.com/media/catalog/product/cache/24e3af3791642c18c52611620aeb2e21/8/2/82lm00brlm_-_1_1.jpg","https://picsum.photos/seed/p001-2/600/600"],
+    "etiquetas": ["Nuevo","Oferta"],
+    "especificaciones": {
+      "CPU": "Ryzen 7 5700U",
+      "RAM": "16GB",
+      "GPU": "Integrada",
+      "Almacenamiento": "512GB SSD",
+      "Pantalla": "14\" FHD",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p002",
+    "categoria": "Notebooks",
+    "marca": "HP",
+    "titulo": "HP Pavilion 15 i5",
+    "descripcion": "15.6\" FHD, Core i5, 8GB, 512GB SSD",
+    "precio": 1600000,
+    "precioAnterior": 2000000,
+    "descuento": 10,
+    "stock": 8,
+    "rating": 4.3,
+    "imagenes": ["https://hiraoka.com.pe/media/catalog/product/a/1/a19bjla_2imagenprincipalsintexto.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=560&width=700&canvas=700:560","https://picsum.photos/seed/p002-2/600/600"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "CPU": "Intel Core i5",
+      "RAM": "8GB",
+      "GPU": "Integrada",
+      "Almacenamiento": "512GB SSD",
+      "Pantalla": "15.6\" FHD",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p003",
+    "categoria": "Notebooks",
+    "marca": "ASUS",
+    "titulo": "ASUS TUF Gaming F15",
+    "descripcion": "15.6\" 144Hz, i7, 16GB, RTX 3060, 1TB SSD",
+    "precio": 6000000,
+    "precioAnterior": 8000000,
+    "descuento": 12,
+    "stock": 5,
+    "rating": 4.7,
+    "imagenes": ["https://nfshop.com.py/wp-content/uploads/2021/12/WhatsApp-Image-2021-12-07-at-11.09.06-1.jpeg","https://png.pngtree.com/png-vector/20191026/ourmid/pngtree-laptop-icon-png-image_1871608.jpg"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "CPU": "Intel Core i7",
+      "RAM": "16GB",
+      "GPU": "RTX 3060",
+      "Almacenamiento": "1TB SSD",
+      "Pantalla": "15.6\" 144Hz",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p004",
+    "categoria": "Componentes",
+    "marca": "NVIDIA",
+    "titulo": "GeForce RTX 4070 12GB",
+    "descripcion": "Gaming 1440p alto rendimiento",
+    "precio": 6000000,
+    "precioAnterior": 7000000,
+    "descuento": 14,
+    "stock": 10,
+    "rating": 4.8,
+    "imagenes": ["https://nissei.com/media/catalog/product/cache/24e3af3791642c18c52611620aeb2e21/g/e/geforce_rtx_4070_super_windforce_oc_12g-01.jpg","https://picsum.photos/seed/p004-2/600/600"],
+    "etiquetas": ["Top","Oferta"],
+    "especificaciones": {
+      "GPU": "RTX 4070",
+      "RAM": "12GB GDDR6X",
+      "Salidas": "HDMI 2.1, DP 1.4a",
+      "Recomendado": "650W PSU",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p005",
+    "categoria": "Componentes",
+    "marca": "AMD",
+    "titulo": "Ryzen 5 7600X",
+    "descripcion": "6C/12T hasta 5.3GHz",
+    "precio": 2000000,
+    "precioAnterior": 2500000,
+    "descuento": 15,
+    "stock": 15,
+    "rating": 4.6,
+    "imagenes": ["https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-5-7600x-og.jpg"],
+    "etiquetas": ["Nuevo"],
+    "especificaciones": {
+      "Núcleos": "6",
+      "Hilos": "12",
+      "Frecuencia": "4.7/5.3GHz",
+      "Socket": "AM5",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p006",
+    "categoria": "Almacenamiento",
+    "marca": "Samsung",
+    "titulo": "SSD 980 PRO 1TB NVMe",
+    "descripcion": "PCIe 4.0 hasta 7000MB/s",
+    "precio": 700000,
+    "precioAnterior": 800000,
+    "descuento": 29,
+    "stock": 20,
+    "rating": 4.9,
+    "imagenes": ["https://m.media-amazon.com/images/I/61Mo8ug0aQS._UF894,1000_QL80_.jpg"],
+    "etiquetas": ["Oferta","Top"],
+    "especificaciones": {
+      "Interfaz": "PCIe 4.0 x4",
+      "Lectura": "7000MB/s",
+      "Escritura": "5000MB/s",
+      "Garantía": "60 meses"
+    }
+  },
+  {
+    "id": "p007",
+    "categoria": "Periféricos",
+    "marca": "Logitech",
+    "titulo": "Teclado Mecánico G Pro",
+    "descripcion": "Switches GX Blue, RGB",
+    "precio": 600000,
+    "precioAnterior": 1000000,
+    "descuento": 23,
+    "stock": 25,
+    "rating": 4.5,
+    "imagenes": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1g_qeoRpO3VQje3eESl5e0RK5pvFA6jWE3g&s"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "Tipo": "Mecánico",
+      "Formato": "TKL",
+      "Iluminación": "RGB",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p008",
+    "categoria": "Monitores",
+    "marca": "LG",
+    "titulo": "Monitor 27\" 144Hz IPS",
+    "descripcion": "QHD, 1ms, FreeSync",
+    "precio": 1600000,
+    "precioAnterior": 1800000,
+    "descuento": 20,
+    "stock": 18,
+    "rating": 4.4,
+    "imagenes": ["https://www.lg.com/ae/images/monitors/md07514525/gallery/desktop-01.jpg","https://picsum.photos/seed/p008-2/600/600"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "Tamaño": "27\"",
+      "Panel": "IPS",
+      "Frecuencia": "144Hz",
+      "Resolución": "2560x1440",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p009",
+    "categoria": "Redes",
+    "marca": "TP-Link",
+    "titulo": "Router WiFi 6 AX3000",
+    "descripcion": "Doble banda, MU-MIMO, OFDMA",
+    "precio": 400000,
+    "precioAnterior": 600000,
+    "descuento": 18,
+    "stock": 30,
+    "rating": 4.2,
+    "imagenes": ["https://cellshop.com.py/media/catalog/product/4/1/4109679_1_1.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=616&width=616&canvas=616:616"],
+    "etiquetas": ["Nuevo"],
+    "especificaciones": {
+      "WiFi": "802.11ax",
+      "Velocidad": "3000Mbps",
+      "Puertos": "4x LAN, 1x WAN",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p010",
+    "categoria": "Periféricos",
+    "marca": "Razer",
+    "titulo": "Mouse Razer DeathAdder",
+    "descripcion": "Focus+ 20K DPI",
+    "precio": 300000,
+    "precioAnterior": 400000,
+    "descuento": 29,
+    "stock": 40,
+    "rating": 4.4,
+    "imagenes": ["https://nissei.com/media/catalog/product/cache/24e3af3791642c18c52611620aeb2e21/1/1/112748-rz01-04630100-r3u1-7.jpg"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Sensor": "Óptico 20K DPI",
+      "Botones": "6",
+      "Peso": "82g",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p011",
+    "categoria": "Almacenamiento",
+    "marca": "Crucial",
+    "titulo": "SSD SATA MX500 1TB",
+    "descripcion": "SATA III, 560MB/s",
+    "precio": 300000,
+    "precioAnterior": 500000,
+    "descuento": 20,
+    "stock": 35,
+    "rating": 4.7,
+    "imagenes": ["https://www.solcontrol.com.py/userfiles/images/productos/620/rt230113-1.jpg"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "Interfaz": "SATA III",
+      "Lectura": "560MB/s",
+      "Escritura": "510MB/s",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p012",
+    "categoria": "Componentes",
+    "marca": "MSI",
+    "titulo": "Motherboard B650 Tomahawk",
+    "descripcion": "AM5, DDR5, PCIe 4.0",
+    "precio": 800000,
+    "precioAnterior": 1100000,
+    "descuento": 8,
+    "stock": 14,
+    "rating": 4.5,
+    "imagenes": ["https://i0.wp.com/www.aslanstoreuy.com/wp-content/uploads/2024/05/Motherboard-MSI-MAG-B650-TOMAHAWK-Wifi-Aslan-Store-2.webp?fit=600%2C600&ssl=1"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Socket": "AM5",
+      "Memoria": "DDR5",
+      "PCIe": "4.0",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p013",
+    "categoria": "Monitores",
+    "marca": "AOC",
+    "titulo": "Monitor 24\" 75Hz IPS",
+    "descripcion": "FHD, marco delgado",
+    "precio": 1000000,
+    "precioAnterior": 1200000,
+    "descuento": 13,
+    "stock": 22,
+    "rating": 4.1,
+    "imagenes": ["https://cellshop.com.py/media/catalog/product/3/8/3822241_1_1.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=616&width=616&canvas=616:616"],
+    "etiquetas": ["Nuevo"],
+    "especificaciones": {
+      "Tamaño": "24\"",
+      "Panel": "IPS",
+      "Frecuencia": "75Hz",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p014",
+    "categoria": "Redes",
+    "marca": "Ubiquiti",
+    "titulo": "AP WiFi 6 Lite",
+    "descripcion": "Punto de acceso WiFi 6",
+    "precio": 700000,
+    "precioAnterior": 900000,
+    "descuento": 23,
+    "stock": 16,
+    "rating": 4.6,
+    "imagenes": ["https://nissei.com/media/catalog/product/cache/24e3af3791642c18c52611620aeb2e21/b/r/br-103768-3.jpg"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "WiFi": "802.11ax",
+      "PoE": "802.3af",
+      "Cobertura": "85m²",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p015",
+    "categoria": "Periféricos",
+    "marca": "HyperX",
+    "titulo": "Headset Cloud II",
+    "descripcion": "7.1 virtual, micrófono removible",
+    "precio": 500000,
+    "precioAnterior": 700000,
+    "descuento": 20,
+    "stock": 28,
+    "rating": 4.5,
+    "imagenes": ["https://m.media-amazon.com/images/I/71MJ3OaVqBL._AC_SL1500_.jpg"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Sonido": "7.1 virtual",
+      "Conector": "3.5mm/USB",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p016",
+    "categoria": "Almacenamiento",
+    "marca": "Western Digital",
+    "titulo": "HDD 4TB Blue 3.5\"",
+    "descripcion": "SATA III 5400rpm",
+    "precio": 700000,
+    "precioAnterior": 800000,
+    "descuento": 11,
+    "stock": 12,
+    "rating": 4.0,
+    "imagenes": ["https://fullh4rd.com.ar/img/productos/12/hd-hdd-4tb-wd-blue-sata-iii-35-0.jpg"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Interfaz": "SATA III",
+      "RPM": "5400",
+      "Tamaño": "3.5\"",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p017",
+    "categoria": "Componentes",
+    "marca": "Corsair",
+    "titulo": "RAM Vengeance 32GB DDR5 6000",
+    "descripcion": "2x16GB CL36",
+    "precio": 900000,
+    "precioAnterior": 1000000,
+    "descuento": 22,
+    "stock": 18,
+    "rating": 4.6,
+    "imagenes": ["https://m.media-amazon.com/images/I/61L8HPVBoUL._UF894,1000_QL80_.jpg"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "Capacidad": "32GB",
+      "Tipo": "DDR5-6000",
+      "Latencia": "CL36",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p018",
+    "categoria": "Monitores",
+    "marca": "Samsung",
+    "titulo": "Odyssey G5 34\" UWQHD 165Hz",
+    "descripcion": "Curvo, 1ms, HDR10",
+    "precio": 3000000,
+    "precioAnterior": 3500000,
+    "descuento": 18,
+    "stock": 7,
+    "rating": 4.7,
+    "imagenes": ["https://images.samsung.com/is/image/samsung/p6pim/co/lc34g55twwnxza/gallery/co-odyssey-g5-34g5-lc34g55twwnxza-533423885?$684_547_PNG$","https://picsum.photos/seed/p018-2/600/600"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "Tamaño": "34\"",
+      "Curvatura": "1000R",
+      "Frecuencia": "165Hz",
+      "Resolución": "3440x1440",
+      "Garantía": "24 meses"
+    }
+  }
+  ,
+  {
+    "id": "p019",
+    "categoria": "Notebooks",
+    "marca": "Dell",
+    "titulo": "Dell XPS 13 EVO i7",
+    "descripcion": "13.4\" FHD+, i7, 16GB, 512GB SSD",
+    "precio": 7400000,
+    "precioAnterior": 7600000,
+    "descuento": 7,
+    "stock": 6,
+    "rating": 4.6,
+    "imagenes": ["https://www.noticias3d.com/articulos/202210/dell-xps-13-plus/imagenes/dell-xps-13-plus-9-G.jpg","https://picsum.photos/seed/p019-2/600/600"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "CPU": "Intel Core i7 EVO",
+      "RAM": "16GB",
+      "GPU": "Integrada Iris Xe",
+      "Almacenamiento": "512GB SSD",
+      "Pantalla": "13.4\" FHD+",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p020",
+    "categoria": "Componentes",
+    "marca": "Intel",
+    "titulo": "Core i9-13900K",
+    "descripcion": "24C/32T hasta 5.8GHz",
+    "precio": 3000000,
+    "precioAnterior": 3200000,
+    "descuento": 6,
+    "stock": 9,
+    "rating": 4.8,
+    "imagenes": ["https://i0.wp.com/www.mastertech.com.py/wp-content/uploads/2023/01/Procesador-Intel-I9-13900K-1700-Sin-cooler.png?fit=1080%2C1080&ssl=1"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "Núcleos": "24",
+      "Hilos": "32",
+      "Frecuencia": "5.8GHz Max",
+      "Socket": "LGA1700",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p021",
+    "categoria": "Componentes",
+    "marca": "Gigabyte",
+    "titulo": "GeForce RTX 4060 Ti 8GB",
+    "descripcion": "DLSS 3, eficiencia superior",
+    "precio": 3500000,
+    "precioAnterior": 4000000,
+    "descuento": 11,
+    "stock": 13,
+    "rating": 4.4,
+    "imagenes": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwphYchhbEGGYjTAVKhldiXdZSZXIZbxxsbw&s","https://picsum.photos/seed/p021-2/600/600"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "GPU": "RTX 4060 Ti",
+      "RAM": "8GB GDDR6",
+      "Salidas": "HDMI 2.1, DP 1.4a",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p022",
+    "categoria": "Periféricos",
+    "marca": "SteelSeries",
+    "titulo": "Mouse Rival 600",
+    "descripcion": "Sensor dual, 12,000 CPI",
+    "precio":4000000,
+    "precioAnterior": 5000000,
+    "descuento": 25,
+    "stock": 26,
+    "rating": 4.3,
+    "imagenes": ["https://i.rtings.com/assets/products/kUZLNYfc/steelseries-rival-600/design-large.jpg?format=auto"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Sensor": "Dual TrueMove3+",
+      "Botones": "7",
+      "Peso": "96g",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p023",
+    "categoria": "Periféricos",
+    "marca": "Keychron",
+    "titulo": "Teclado K6 Wireless",
+    "descripcion": "65%, Bluetooth, Hot-swappable",
+    "precio": 150000,
+    "precioAnterior": 200000,
+    "descuento": 18,
+    "stock": 20,
+    "rating": 4.5,
+    "imagenes": ["https://m.media-amazon.com/images/I/61wGrs37mOL._AC_SL1500_.jpg"],
+    "etiquetas": ["Nuevo"],
+    "especificaciones": {
+      "Tipo": "Mecánico",
+      "Conectividad": "BT/USB-C",
+      "Formato": "65%",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p024",
+    "categoria": "Almacenamiento",
+    "marca": "Kingston",
+    "titulo": "NV 2 2TB NVMe",
+    "descripcion": "PCIe 4.0, rendimiento sólido",
+    "precio": 800000,
+    "precioAnterior": 850000,
+    "descuento": 25,
+    "stock": 17,
+    "rating": 4.6,
+    "imagenes": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA3UPSdluMPmGGbdNZsEv7nYoPBw0Qxw6qkA&s"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "Interfaz": "PCIe 4.0 x4",
+      "Capacidad": "2TB",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p025",
+    "categoria": "Redes",
+    "marca": "MikroTik",
+    "titulo": "Switch 5P Gigabit",
+    "descripcion": "Switch no administrable 5 puertos",
+    "precio": 70000,
+    "precioAnterior": 100000,
+    "descuento": 25,
+    "stock": 45,
+    "rating": 4.2,
+    "imagenes": ["https://www.pchouse.com.py/wp-content/uploads/2025/07/TL-SG1005P_UN_2.0_01_normal_1591067715382k.jpg"],
+    "etiquetas": [],
+    "especificaciones": {
+      "Puertos": "5x RJ45 Gigabit",
+      "Alimentación": "DC",
+      "Garantía": "12 meses"
+    }
+  },
+  {
+    "id": "p026",
+    "categoria": "Monitores",
+    "marca": "BenQ",
+    "titulo": "Monitor 32\" 4K HDR",
+    "descripcion": "IPS, HDR10, Eye-Care",
+    "precio": 700000,
+    "precioAnterior": 800000,
+    "descuento": 13,
+    "stock": 11,
+    "rating": 4.4,
+    "imagenes": ["https://images.philips.com/is/image/philipsconsumer/d7dfb5a481054649800eb16400b34903?wid=700&hei=700&$pnglarge$"],
+   "etiquetas": ["Top"],
+    "especificaciones": {
+      "Tamaño": "32\"",
+      "Resolución": "3840x2160",
+      "HDR": "HDR10",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p027",
+    "categoria": "Componentes",
+    "marca": "Noctua",
+    "titulo": "Cooler NH-D15",
+    "descripcion": "Doble torre, silencioso",
+    "precio": 750000,
+    "precioAnterior": 880000,
+    "descuento": 9,
+    "stock": 19,
+    "rating": 4.9,
+    "imagenes": ["https://www.vedantcomputers.com/image/cache/catalog/assets/product/noctua/cpu-cooler/nh-d15-ch-bk/nh-d15-ch-bk-1-550x550.jpg"],
+    "etiquetas": ["Top"],
+    "especificaciones": {
+      "Compatibilidad": "AM5/LGA1700",
+      "Ventiladores": "2x140mm",
+      "Garantía": "72 meses"
+    }
+  },
+  {
+    "id": "p028",
+    "categoria": "Periféricos",
+    "marca": "Elgato",
+    "titulo": "Stream Deck Mini",
+    "descripcion": "6 teclas LCD programables",
+    "precio": 700000,
+    "precioAnterior":800000,
+    "descuento": 20,
+    "stock": 15,
+    "rating": 4.3,
+    "imagenes": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRwgzwGjT9cp95OlKlRRvFEd5UdGAODjYwvw&s"],
+    "etiquetas": ["Nuevo"],
+    "especificaciones": {
+      "Conectividad": "USB",
+      "Teclas": "6 LCD",
+      "Garantía": "24 meses"
+    }
+  },
+  {
+    "id": "p029",
+    "categoria": "Almacenamiento",
+    "marca": "Seagate",
+    "titulo": "HDD 8TB IronWolf NAS",
+    "descripcion": "NAS optimizado, 7200rpm",
+    "precio": 1500000,
+    "precioAnterior": 1700000,
+    "descuento": 18,
+    "stock": 10,
+    "rating": 4.5,
+    "imagenes": ["https://misionera.com.py/storage/2023/04/93453.png"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "Interfaz": "SATA III",
+      "RPM": "7200",
+      "Capacidad": "8TB",
+      "Garantía": "36 meses"
+    }
+  },
+  {
+    "id": "p030",
+    "categoria": "Notebooks",
+    "marca": "Acer",
+    "titulo": "Acer Nitro 5 Ryzen 5 RTX 3050",
+    "descripcion": "15.6\" 144Hz, 16GB, 512GB",
+    "precio": 5000000,
+    "precioAnterior": 6000000,
+    "descuento": 10,
+    "stock": 9,
+    "rating": 4.4,
+    "imagenes": ["https://media.game.es/COVERV2/3D_L/V1F/V1FVEA.png","https://picsum.photos/seed/p030-2/600/600"],
+    "etiquetas": ["Oferta"],
+    "especificaciones": {
+      "CPU": "Ryzen 5 5600H",
+      "RAM": "16GB",
+      "GPU": "RTX 3050",
+      "Almacenamiento": "512GB SSD",
+      "Pantalla": "15.6\" 144Hz",
+      "Garantía": "12 meses"
+    }
+  }
+]
+
+
